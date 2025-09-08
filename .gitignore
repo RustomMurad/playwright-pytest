@@ -22,3 +22,9 @@ trace.zip
 *.code-workspace
 # macOS
 .DS_Stor
+
+# Playwright
+node_modules/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
