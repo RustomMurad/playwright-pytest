@@ -1,5 +1,6 @@
 import time
-from playwright.sync_api import Playwright
+from playwright.sync_api import Playwright, expect
+
 
 def test_playwright_basic(playwright: Playwright,pytestconfig):
     headed = pytestconfig.getoption("--headed")
@@ -18,5 +19,4 @@ def test_playwright_basic(playwright: Playwright,pytestconfig):
     nokia_product = page.locator('app-card').filter(has_text='Nokia Edge')
     nokia_product.get_by_role('button').click()
     page.get_by_text('Checkout').click()
-
-    time.sleep(5)
+    expect(page.locator('.media-body'),'Product count in checkout should be equal 2!').to_have_count(2)
