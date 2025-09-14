@@ -9,7 +9,7 @@ def test_e2e_web_api(playwright: Playwright, pytestconfig):
 
     # Create order -> orderId
     api_utils = APIUtils()
-    api_utils.create_order(playwright)
+    order_id = api_utils.create_order(playwright)
 
 
     # Login
@@ -17,8 +17,12 @@ def test_e2e_web_api(playwright: Playwright, pytestconfig):
     page.get_by_placeholder('email@example.com').fill('rahulshetty@gmail.com')
     page.get_by_placeholder('enter your passsword').fill('Iamking@000')
     page.get_by_role('button', name='Login').click()
+    page.get_by_role('button', name='ORDERS').click()
 
     #Orders History page - order is present
-
+    row=page.locator('tr').filter(has_text=order_id)
+    row.get_by_role('button',name='View').click()
+    expect(page.locator('.tagline')).to_contain_text('Thank you')
+    context.close()
 
     
