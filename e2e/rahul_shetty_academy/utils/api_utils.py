@@ -26,3 +26,6 @@ class APIUtils:
                                  },
                                  data={"orders":[{"country":"India","productOrderedId":"68a961719320a140fe1ca57c"}]})
         print(response.json())
+        response_body = response.json()
+        order_id = response_body['orders'][0]
+        return order_id
