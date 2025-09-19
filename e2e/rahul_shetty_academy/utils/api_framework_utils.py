@@ -11,7 +11,6 @@ class APIUtils:
                                             headers={"Content-Type":"application/json"},
                                             data={"userEmail": user_email,"userPassword": user_password})
         assert response.ok
-        print(response.json())
         response_body = response.json()
         return response_body['token']
 
@@ -27,7 +26,6 @@ class APIUtils:
                                      "Content-Type":"application/json"
                                  },
                                  data={"orders":[{"country":"India","productOrderedId":"68a961719320a140fe1ca57c"}]})
-        print(response.json())
         response_body = response.json()
         order_id = response_body['orders'][0]
         return order_id
